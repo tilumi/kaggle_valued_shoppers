@@ -2,11 +2,11 @@ transactions = LOAD 'reducedTransactions.csv/*' USING PigStorage(',') AS (user:c
 
 transactions = FILTER transactions by user != 'id';
 
-groupedTransactions = GROUP transactions BY (user, company, category, brand);
+groupedTransactions = GROUP transactions BY (user, company);
 
 result = FOREACH groupedTransactions {
 		total = FOREACH  transactions GENERATE purchasequantity * productsize;
 		GENERATE FLATTEN(group), COUNT(transactions), SUM(total);
 } 
 
-STORE result INTO 'purchasedCountByItem.csv' using PigStorage(',','-schema');;
+STORE result INTO 'purchasedCountByCompany.csv' using PigStorage(',','-schema');;
