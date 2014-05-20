@@ -1,4 +1,6 @@
-transactions = LOAD 'transactions.csv' USING PigStorage(',') AS (user:chararray, chain:chararray, dept:chararray, category:chararray, company:chararray, brand: chararray, date: chararray, productsize:chararray, productmeasure:chararray, purchasequantity: chararray, purchaseamount: chararray);
+transactions = LOAD 'transactions.csv' USING PigStorage(',') AS (user:chararray, chain:chararray, dept:chararray, category:chararray, company:chararray, brand: chararray, date: chararray, productsize:double, productmeasure:chararray, purchasequantity: double, purchaseamount: double);
+
+transactions = FILTER transactions by user != 'id';
 
 trainHistory = LOAD 'trainHistory.csv' USING PigStorage(',') AS (user:chararray, chain:chararray, offer:chararray, market:chararray, repeattrips:chararray, repeater: chararray, offerdate: chararray);
 

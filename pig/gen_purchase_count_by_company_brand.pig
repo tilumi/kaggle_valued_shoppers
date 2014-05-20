@@ -7,4 +7,4 @@ result = FOREACH groupedTransactions {
 		GENERATE FLATTEN(group), COUNT(transactions), SUM(total);
 } 
 
-DUMP result;
+STORE result INTO 'purchasedCountByCompanyBrand.csv' using PigStorage(',','-schema');;
