@@ -14,9 +14,10 @@ grouped_purchased_count_by_user_category = GROUP purchased_count BY (user,catego
 
 
 result = FOREACH grouped_purchased_count_by_user_category {
-	purchased_count = ORDER purchased_count BY purchased_count;
-    purchased_count_ordered = purchased_count.purchased_count;    
-    GENERATE FLATTEN(group), Entropy(purchased_count_ordered);  
+	total = FOREACH  purchased_count GENERATE purchased_count * LOG(purchased_count);
+    GENERATE FLATTEN(group), -1* (SUM(total)/SUM(purchased_count.purchased_count)-LOG(SUM(purchased_count.purchased_count))) as entropy;         
 }
 
-STORE result INTO 'purchasedEntropyByCategory.csv' using PigStorage(',','-schema');;
+result = FILTER result by entropy > 0.0;
+
+STORE result INTO 'purchasedEntropyByCategory.csv' using PigStorage(',','-schema');
