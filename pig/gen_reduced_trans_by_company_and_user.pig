@@ -22,4 +22,4 @@ transactionsAppearInTestHistory = FOREACH transactionsAppearInTestHistory GENERA
 
 reducedTransactions = UNION transactionsAppearInTrainHistory, transactionsAppearInTestHistory;
 
-STORE reducedTransactions INTO 'reducedTransactions.csv' using PigStorage(',','-schema');;
+STORE reducedTransactions INTO 'reducedTransactions.csv' using PigStorage(',','-schema');
