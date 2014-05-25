@@ -11,12 +11,10 @@ class History:
 		self.offerdate = values[6]
 		
 	@classmethod
-	def getHistories(cls,count = 100):
-
-		history_filename = 'data/trainHistory.csv'
+	def getHistories(cls,count = 100, filename = 'data/trainHistory.csv'):
 
 		histories = []
-		for e, line in enumerate(open(history_filename, 'r')):
+		for e, line in enumerate(open(filename, 'r')):
 			if(e == 0):
 				continue
 			if(e > count):

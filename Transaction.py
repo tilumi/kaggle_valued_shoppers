@@ -14,12 +14,12 @@ class Transaction:
 		self.purchaseamount = values[10]
 
 	@classmethod
-	def getTransactions(cls,count = 100):
+	def getTransactions(cls,count = 100, filename = 'data/transactions.csv'):
 
-		transactions_filename = 'data/transactions.csv'
+		filename = 'data/transactions.csv'
 
 		transactions = []
-		for e, line in enumerate(open(transactions_filename, 'r')):
+		for e, line in enumerate(open(filename, 'r')):
 			if(e == 0):
 				continue
 			if(e > count):
