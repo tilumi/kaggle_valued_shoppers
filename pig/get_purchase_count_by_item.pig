@@ -1,4 +1,4 @@
-transactions = LOAD 'reducedTransactions.csv/*' USING PigStorage(',','-schema') AS (user:chararray, chain:chararray, dept:chararray, category:chararray, company:chararray, brand: chararray, date: chararray, productsize:double, productmeasure:chararray, purchasequantity: double, purchaseamount: double);
+transactions = LOAD 'reducedTransactions.csv' USING PigStorage(',','-schema') AS (user:chararray, chain:chararray, dept:chararray, category:chararray, company:chararray, brand: chararray, date: chararray, productsize:double, productmeasure:chararray, purchasequantity: double, purchaseamount: double);
 
 transactions = FILTER transactions by user != 'id';
 
