@@ -10,7 +10,7 @@ groupedTransactions = GROUP transactions BY (category, company, brand);
 
 data = FOREACH groupedTransactions {
 	unitPrice  = FOREACH transactions GENERATE (float)purchaseamount / (float)(productsize * purchasequantity);	
-	generate FLATTEN(group), COUNT(transactions), SUM(unitPrice), VAR(unitPrice);
+	generate FLATTEN(group), SUM(unitPrice) / COUNT(transactions), VAR(unitPrice);
 }
 
-STORE data INTO 'purchasedCountAvgUnitPriceVariance.csv' using PigStorage(',','-schema');;
+STORE data INTO '/tmp/purchasedCountAvgUnitPriceVariance.csv' using PigStorage(',');
