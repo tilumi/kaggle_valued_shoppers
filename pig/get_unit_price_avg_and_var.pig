@@ -6,7 +6,7 @@ transactions = LOAD 'transactions.csv' USING PigStorage(',') AS (user:chararray,
 
 transactions = FILTER transactions by user != 'id';
 
-groupedTransactions = GROUP transactions BY (category, company, brand);
+groupedTransactions = GROUP transactions BY (company, category, brand);
 
 data = FOREACH groupedTransactions {
 	unitPrice  = FOREACH transactions GENERATE (float)purchaseamount / (float)(productsize * purchasequantity);	

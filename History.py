@@ -21,3 +21,6 @@ class History:
 				break
 			histories.append(History(line))
 		return histories
+
+	
+
